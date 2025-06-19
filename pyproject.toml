@@ -1,7 +1,7 @@
 [project]
 name = "cpp-quant"
 version = "0.1.0"
-description = "Add your description here"
+description = "C++ Study Progress Tracker for Quantitative Finance Learning"
 readme = "README.md"
 requires-python = ">=3.12"
 dependencies = [
@@ -12,6 +12,32 @@ dependencies = [
     "rich==13.7.1",
 ]
 
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+python_files = ["test_*.py"]
+python_classes = ["Test*"]
+python_functions = ["test_*"]
+addopts = "-v --tb=short --strict-markers"
+markers = [
+    "slow: marks tests as slow (deselect with '-m \"not slow\"')",
+    "integration: marks tests as integration tests",
+]
+
+[tool.coverage.run]
+source = ["study_tracker"]
+omit = ["tests/*", ".venv/*"]
+
+[tool.coverage.report]
+exclude_lines = [
+    "pragma: no cover",
+    "def __repr__",
+    "raise AssertionError",
+    "raise NotImplementedError",
+    "if __name__ == .__main__.:",
+]
 
 [tool.ruff.lint]
 ignore = ["E722", "F401", "F811", "E712"]
+
+[project.scripts]
+study = "study_tracker:main"

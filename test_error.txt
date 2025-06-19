@@ -1,0 +1,171 @@
+🧪 Running Study Tracker Tests...
+================================
+Running tests with coverage...
+============================= test session starts ==============================
+platform linux -- Python 3.12.3, pytest-8.3.2, pluggy-1.6.0 -- /home/cheesecake/Downloads/cpp-quant/.venv/bin/python3
+cachedir: .pytest_cache
+rootdir: /home/cheesecake/Downloads/cpp-quant
+configfile: pyproject.toml
+testpaths: tests
+plugins: cov-5.0.0
+collecting ... collected 32 items
+
+tests/test_study_tracker.py::TestStudyTracker::test_initialization PASSED [  3%]
+tests/test_study_tracker.py::TestStudyTracker::test_create_initial_progress PASSED [  6%]
+tests/test_study_tracker.py::TestStudyTracker::test_parse_markdown FAILED [  9%]
+tests/test_study_tracker.py::TestStudyTracker::test_get_current_day PASSED [ 12%]
+tests/test_study_tracker.py::TestStudyTracker::test_mark_day_complete FAILED [ 15%]
+tests/test_study_tracker.py::TestStudyTracker::test_mark_day_complete_auto FAILED [ 18%]
+tests/test_study_tracker.py::TestStudyTracker::test_save_and_load_progress PASSED [ 21%]
+tests/test_study_tracker.py::TestStudyTracker::test_undo_last_action FAILED [ 25%]
+tests/test_study_tracker.py::TestStudyTracker::test_undo_with_no_history PASSED [ 28%]
+tests/test_study_tracker.py::TestStudyTracker::test_update_streak FAILED [ 31%]
+tests/test_study_tracker.py::TestStudyTracker::test_jump_to_day FAILED   [ 34%]
+tests/test_study_tracker.py::TestStudyTracker::test_jump_to_invalid_day PASSED [ 37%]
+tests/test_study_tracker.py::TestStudyTracker::test_backup_markdown PASSED [ 40%]
+tests/test_study_tracker.py::TestStudyTracker::test_file_not_found PASSED [ 43%]
+tests/test_study_tracker.py::TestStudyTracker::test_malformed_progress_file PASSED [ 46%]
+tests/test_study_tracker.py::TestStudyTracker::test_empty_markdown PASSED [ 50%]
+tests/test_study_tracker.py::TestStudyTracker::test_mixed_checkbox_formats FAILED [ 53%]
+tests/test_study_tracker.py::TestCLIFunctionality::test_main_done_argument PASSED [ 56%]
+tests/test_study_tracker.py::TestCLIFunctionality::test_main_status_argument PASSED [ 59%]
+tests/test_study_tracker.py::TestCLIFunctionality::test_main_next_argument PASSED [ 62%]
+tests/test_study_tracker.py::TestCLIFunctionality::test_main_week_summary_argument PASSED [ 65%]
+tests/test_study_tracker.py::TestCLIFunctionality::test_main_undo_argument PASSED [ 68%]
+tests/test_study_tracker.py::TestCLIFunctionality::test_main_stats_argument PASSED [ 71%]
+tests/test_study_tracker.py::TestCLIFunctionality::test_main_backup_argument PASSED [ 75%]
+tests/test_study_tracker.py::TestCLIFunctionality::test_main_jump_to_argument PASSED [ 78%]
+tests/test_study_tracker.py::TestCLIFunctionality::test_main_no_arguments PASSED [ 81%]
+tests/test_study_tracker.py::TestProgressCalculations::test_progress_percentage ERROR [ 84%]
+tests/test_study_tracker.py::TestProgressCalculations::test_week_progress_calculation ERROR [ 87%]
+tests/test_study_tracker.py::TestProgressCalculations::test_project_counting ERROR [ 90%]
+tests/test_study_tracker.py::TestEdgeCases::test_unicode_in_markdown ERROR [ 93%]
+tests/test_study_tracker.py::TestEdgeCases::test_concurrent_modifications ERROR [ 96%]
+tests/test_study_tracker.py::TestEdgeCases::test_very_long_task_description ERROR [100%]
+
+==================================== ERRORS ====================================
+_____ ERROR at setup of TestProgressCalculations.test_progress_percentage ______
+file /home/cheesecake/Downloads/cpp-quant/tests/test_study_tracker.py, line 460
+      def test_progress_percentage(self, tracker_with_progress):
+file /home/cheesecake/Downloads/cpp-quant/tests/test_study_tracker.py, line 442
+      @pytest.fixture
+      def tracker_with_progress(self, temp_dir, sample_markdown):
+E       fixture 'temp_dir' not found
+>       available fixtures: cache, capfd, capfdbinary, caplog, capsys, capsysbinary, cleanup_test_files, cov, doctest_namespace, isolated_tracker, mock_console, monkeypatch, no_cover, pytestconfig, record_property, record_testsuite_property, record_xml_attribute, recwarn, sample_markdown_content, temp_test_dir, tmp_path, tmp_path_factory, tmpdir, tmpdir_factory, tracker_with_progress
+>       use 'pytest --fixtures [testpath]' for help on them.
+
+/home/cheesecake/Downloads/cpp-quant/tests/test_study_tracker.py:442
+__ ERROR at setup of TestProgressCalculations.test_week_progress_calculation ___
+file /home/cheesecake/Downloads/cpp-quant/tests/test_study_tracker.py, line 474
+      def test_week_progress_calculation(self, tracker_with_progress):
+file /home/cheesecake/Downloads/cpp-quant/tests/test_study_tracker.py, line 442
+      @pytest.fixture
+      def tracker_with_progress(self, temp_dir, sample_markdown):
+E       fixture 'temp_dir' not found
+>       available fixtures: cache, capfd, capfdbinary, caplog, capsys, capsysbinary, cleanup_test_files, cov, doctest_namespace, isolated_tracker, mock_console, monkeypatch, no_cover, pytestconfig, record_property, record_testsuite_property, record_xml_attribute, recwarn, sample_markdown_content, temp_test_dir, tmp_path, tmp_path_factory, tmpdir, tmpdir_factory, tracker_with_progress
+>       use 'pytest --fixtures [testpath]' for help on them.
+
+/home/cheesecake/Downloads/cpp-quant/tests/test_study_tracker.py:442
+_______ ERROR at setup of TestProgressCalculations.test_project_counting _______
+file /home/cheesecake/Downloads/cpp-quant/tests/test_study_tracker.py, line 485
+      def test_project_counting(self, tracker_with_progress):
+file /home/cheesecake/Downloads/cpp-quant/tests/test_study_tracker.py, line 442
+      @pytest.fixture
+      def tracker_with_progress(self, temp_dir, sample_markdown):
+E       fixture 'temp_dir' not found
+>       available fixtures: cache, capfd, capfdbinary, caplog, capsys, capsysbinary, cleanup_test_files, cov, doctest_namespace, isolated_tracker, mock_console, monkeypatch, no_cover, pytestconfig, record_property, record_testsuite_property, record_xml_attribute, recwarn, sample_markdown_content, temp_test_dir, tmp_path, tmp_path_factory, tmpdir, tmpdir_factory, tracker_with_progress
+>       use 'pytest --fixtures [testpath]' for help on them.
+
+/home/cheesecake/Downloads/cpp-quant/tests/test_study_tracker.py:442
+___________ ERROR at setup of TestEdgeCases.test_unicode_in_markdown ___________
+file /home/cheesecake/Downloads/cpp-quant/tests/test_study_tracker.py, line 508
+      def test_unicode_in_markdown(self, temp_dir):
+E       fixture 'temp_dir' not found
+>       available fixtures: cache, capfd, capfdbinary, caplog, capsys, capsysbinary, cleanup_test_files, cov, doctest_namespace, isolated_tracker, mock_console, monkeypatch, no_cover, pytestconfig, record_property, record_testsuite_property, record_xml_attribute, recwarn, sample_markdown_content, temp_test_dir, tmp_path, tmp_path_factory, tmpdir, tmpdir_factory
+>       use 'pytest --fixtures [testpath]' for help on them.
+
+/home/cheesecake/Downloads/cpp-quant/tests/test_study_tracker.py:508
+________ ERROR at setup of TestEdgeCases.test_concurrent_modifications _________
+file /home/cheesecake/Downloads/cpp-quant/tests/test_study_tracker.py, line 528
+      def test_concurrent_modifications(self, tracker):
+E       fixture 'tracker' not found
+>       available fixtures: cache, capfd, capfdbinary, caplog, capsys, capsysbinary, cleanup_test_files, cov, doctest_namespace, isolated_tracker, mock_console, monkeypatch, no_cover, pytestconfig, record_property, record_testsuite_property, record_xml_attribute, recwarn, sample_markdown_content, temp_test_dir, tmp_path, tmp_path_factory, tmpdir, tmpdir_factory
+>       use 'pytest --fixtures [testpath]' for help on them.
+
+/home/cheesecake/Downloads/cpp-quant/tests/test_study_tracker.py:528
+_______ ERROR at setup of TestEdgeCases.test_very_long_task_description ________
+file /home/cheesecake/Downloads/cpp-quant/tests/test_study_tracker.py, line 541
+      def test_very_long_task_description(self, temp_dir):
+E       fixture 'temp_dir' not found
+>       available fixtures: cache, capfd, capfdbinary, caplog, capsys, capsysbinary, cleanup_test_files, cov, doctest_namespace, isolated_tracker, mock_console, monkeypatch, no_cover, pytestconfig, record_property, record_testsuite_property, record_xml_attribute, recwarn, sample_markdown_content, temp_test_dir, tmp_path, tmp_path_factory, tmpdir, tmpdir_factory
+>       use 'pytest --fixtures [testpath]' for help on them.
+
+/home/cheesecake/Downloads/cpp-quant/tests/test_study_tracker.py:541
+=================================== FAILURES ===================================
+_____________________ TestStudyTracker.test_parse_markdown _____________________
+tests/test_study_tracker.py:113: in test_parse_markdown
+    assert len(tracker.checkboxes) == 13  # Total checkboxes in sample
+E   assert 0 == 13
+E    +  where 0 = len([])
+E    +    where [] = <study_tracker.StudyTracker object at 0x7b24dd0dbaa0>.checkboxes
+___________________ TestStudyTracker.test_mark_day_complete ____________________
+tests/test_study_tracker.py:140: in test_mark_day_complete
+    assert result == True
+E   assert False == True
+_________________ TestStudyTracker.test_mark_day_complete_auto _________________
+tests/test_study_tracker.py:160: in test_mark_day_complete_auto
+    assert result == True
+E   assert False == True
+____________________ TestStudyTracker.test_undo_last_action ____________________
+tests/test_study_tracker.py:189: in test_undo_last_action
+    assert 1 in tracker.progress_data["completed_days"]
+E   assert 1 in []
+_____________________ TestStudyTracker.test_update_streak ______________________
+tests/test_study_tracker.py:231: in test_update_streak
+    assert tracker.progress_data["stats"]["current_streak"] == 2
+E   assert 0 == 2
+______________________ TestStudyTracker.test_jump_to_day _______________________
+tests/test_study_tracker.py:243: in test_jump_to_day
+    assert 1 in tracker.progress_data["completed_days"]
+E   assert 1 in []
+_________________ TestStudyTracker.test_mixed_checkbox_formats _________________
+tests/test_study_tracker.py:327: in test_mixed_checkbox_formats
+    assert len(tracker.checkboxes) == 3
+E   assert 0 == 3
+E    +  where 0 = len([])
+E    +    where [] = <study_tracker.StudyTracker object at 0x7b24dd191e20>.checkboxes
+
+---------- coverage: platform linux, python 3.12.3-final-0 -----------
+Name               Stmts   Miss  Cover   Missing
+------------------------------------------------
+study_tracker.py     334    218    35%   24-26, 100-104, 119-120, 129-157, 162-163, 167-198, 208-242, 246-338, 342-386, 390-441, 453-463, 469-546, 558-559, 592, 599
+------------------------------------------------
+TOTAL                334    218    35%
+Coverage HTML written to dir htmlcov
+
+=========================== short test summary info ============================
+FAILED tests/test_study_tracker.py::TestStudyTracker::test_parse_markdown - a...
+FAILED tests/test_study_tracker.py::TestStudyTracker::test_mark_day_complete
+FAILED tests/test_study_tracker.py::TestStudyTracker::test_mark_day_complete_auto
+FAILED tests/test_study_tracker.py::TestStudyTracker::test_undo_last_action
+FAILED tests/test_study_tracker.py::TestStudyTracker::test_update_streak - as...
+FAILED tests/test_study_tracker.py::TestStudyTracker::test_jump_to_day - asse...
+FAILED tests/test_study_tracker.py::TestStudyTracker::test_mixed_checkbox_formats
+ERROR tests/test_study_tracker.py::TestProgressCalculations::test_progress_percentage
+ERROR tests/test_study_tracker.py::TestProgressCalculations::test_week_progress_calculation
+ERROR tests/test_study_tracker.py::TestProgressCalculations::test_project_counting
+ERROR tests/test_study_tracker.py::TestEdgeCases::test_unicode_in_markdown
+ERROR tests/test_study_tracker.py::TestEdgeCases::test_concurrent_modifications
+ERROR tests/test_study_tracker.py::TestEdgeCases::test_very_long_task_description
+==================== 7 failed, 19 passed, 6 errors in 0.77s ====================
+
+[0;32m✅ Tests complete![0m
+Coverage report generated in htmlcov/index.html
+
+Test Summary:
+=============
+ERROR tests/test_study_tracker.py::TestProgressCalculations::test_project_counting
+ERROR tests/test_study_tracker.py::TestEdgeCases::test_unicode_in_markdown
+ERROR tests/test_study_tracker.py::TestEdgeCases::test_concurrent_modifications
+ERROR tests/test_study_tracker.py::TestEdgeCases::test_very_long_task_description
+==================== 7 failed, 19 passed, 6 errors in 0.10s ====================

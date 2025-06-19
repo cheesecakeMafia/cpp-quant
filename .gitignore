@@ -1,10 +1,33 @@
 # Python-generated files
 __pycache__/
-*.py[oc]
+*.py[cod]
+*$py.class
 build/
 dist/
 wheels/
 *.egg-info
+.eggs/
 
 # Virtual environments
-.venv
+.venv/
+venv/
+ENV/
+
+# Testing
+.coverage
+.pytest_cache/
+htmlcov/
+.tox/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Project specific
+.study_progress.json
+*.backup_*
+
+# Environment
+.env
