@@ -6,7 +6,7 @@ A Python CLI tool to track progress through a 6-month C++ learning path focused 
 
 ```bash
 # Clone the repo
-git clone <your-repo-url>
+git clone https://github.com/cheesecakeMafia/cpp-quant
 cd cpp-quant
 
 # Install dependencies with uv
