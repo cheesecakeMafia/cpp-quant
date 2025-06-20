@@ -81,6 +81,7 @@ class StudyTracker:
         self.checkboxes = []
         current_week = 0
         current_phase = ""
+        current_day = 0
 
         for i, line in enumerate(self.markdown_content):
             # Track current week
@@ -93,18 +94,23 @@ class StudyTracker:
             if "## 📅 PHASE" in line:
                 current_phase = line.strip()
 
-            # Find checkboxes with Day pattern
-            if "- [ ]" in line or "- [x]" in line or "- [X]" in line:
+            # Track current day from headers like "#### Day 1 (1 hour - Weekday)"
+            if line.startswith("#### Day"):
                 day_match = re.search(r"Day (\d+)", line)
                 if day_match:
-                    day_num = int(day_match.group(1))
+                    current_day = int(day_match.group(1))
+
+            # Find checkboxes and associate them with the current day
+            if "- [ ]" in line or "- [x]" in line or "- [X]" in line:
+                # Only process if we have a valid current_day
+                if current_day > 0:
                     is_checked = "- [x]" in line.lower()
                     content = line.strip()
 
                     self.checkboxes.append(
                         {
                             "line_index": i,
-                            "day": day_num,
+                            "day": current_day,
                             "week": current_week,
                             "phase": current_phase,
                             "checked": is_checked,
@@ -132,6 +138,9 @@ class StudyTracker:
                 self.markdown_content[line_index] = self.markdown_content[
                     line_index
                 ].replace("- [ ]", "- [x]")
+
+                # Update checkbox state in memory
+                cb["checked"] = True
 
                 # Update progress data
                 self.progress_data["completed_days"].append(day)
@@ -223,6 +232,9 @@ class StudyTracker:
                 self.markdown_content[line_index] = self.markdown_content[
                     line_index
                 ].replace("- [x]", "- [ ]")
+
+                # Update checkbox state in memory
+                cb["checked"] = False
 
                 # Update progress data
                 self.progress_data["completed_days"].remove(day)
