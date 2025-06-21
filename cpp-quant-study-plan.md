@@ -37,22 +37,22 @@
 **Goal**: Environment setup and basic syntax
 
 #### Day 1 (1 hour - Weekday)
-- [ ] Install g++ compiler and VS Code C++ extensions
-- [ ] Configure VS Code for C++ development
-- [ ] Create GitHub repo: "cpp-quant-journey"
-- [ ] Watch Course 1: Introduction & Course Overview
+- [x] Install g++ compiler and VS Code C++ extensions
+- [x] Configure VS Code for C++ development
+- [x] Create GitHub repo: "cpp-quant-journey"
+- [x] Watch Course 1: Introduction & Course Overview
 
 #### Day 2 (1 hour - Weekday)
-- [ ] Watch: C++ Basics - Program Structure
-- [ ] Code: First "Hello World" program
-- [ ] Understand compilation process (vs Python interpretation)
-- [ ] Practice: Compile and run from terminal
+- [x] Watch: C++ Basics - Program Structure
+- [x] Code: First "Hello World" program
+- [x] Understand compilation process (vs Python interpretation)
+- [x] Practice: Compile and run from terminal
 
 #### Day 3 (1 hour - Weekday)
-- [ ] Watch: Variables and Data Types
-- [ ] Compare C++ types with Python types
-- [ ] Code: Variable declaration exercises
-- [ ] Note differences: static typing vs dynamic typing
+- [x] Watch: Variables and Data Types
+- [x] Compare C++ types with Python types
+- [x] Code: Variable declaration exercises
+- [x] Note differences: static typing vs dynamic typing
 
 #### Day 4 (1 hour - Weekday)
 - [ ] Watch: Input/Output in C++

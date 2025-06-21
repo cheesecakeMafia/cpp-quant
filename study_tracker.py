@@ -131,40 +131,47 @@ class StudyTracker:
         if day is None:
             day = self.get_current_day()
 
-        for cb in self.checkboxes:
-            if cb["day"] == day and not cb["checked"]:
-                # Update markdown content
-                line_index = cb["line_index"]
-                self.markdown_content[line_index] = self.markdown_content[
-                    line_index
-                ].replace("- [ ]", "- [x]")
+        # Find all unchecked boxes for this day
+        day_checkboxes = [cb for cb in self.checkboxes if cb["day"] == day and not cb["checked"]]
+        
+        if not day_checkboxes:
+            return False
 
-                # Update checkbox state in memory
-                cb["checked"] = True
+        # Update all checkboxes for this day
+        for cb in day_checkboxes:
+            # Update markdown content
+            line_index = cb["line_index"]
+            self.markdown_content[line_index] = self.markdown_content[
+                line_index
+            ].replace("- [ ]", "- [x]")
 
-                # Update progress data
-                self.progress_data["completed_days"].append(day)
-                self.progress_data["last_activity"] = datetime.now().isoformat()
-                self.progress_data["stats"]["total_study_sessions"] += 1
+            # Update checkbox state in memory
+            cb["checked"] = True
 
-                # Add to history
-                self.progress_data["history"].append(
-                    {
-                        "action": "complete",
-                        "day": day,
-                        "timestamp": datetime.now().isoformat(),
-                    }
-                )
+        # Update progress data (add day to completed_days if not already there)
+        if day not in self.progress_data["completed_days"]:
+            self.progress_data["completed_days"].append(day)
+        
+        self.progress_data["last_activity"] = datetime.now().isoformat()
+        self.progress_data["stats"]["total_study_sessions"] += 1
 
-                # Update streak
-                self.update_streak()
+        # Add single completion entry to history
+        self.progress_data["history"].append(
+            {
+                "action": "complete",
+                "day": day,
+                "timestamp": datetime.now().isoformat(),
+            }
+        )
 
-                # Save files
-                self.save_markdown()
-                self.save_progress()
+        # Update streak
+        self.update_streak()
 
-                return True
-        return False
+        # Save files once
+        self.save_markdown()
+        self.save_progress()
+
+        return True
 
     def save_markdown(self):
         """Save updated markdown content back to file"""
@@ -210,6 +217,7 @@ class StudyTracker:
 
     def undo_last_action(self) -> bool:
         """Undo the last completed day"""
+        self.parse_markdown()
         if not self.progress_data["history"]:
             return False
 
@@ -225,33 +233,39 @@ class StudyTracker:
 
         day = last_complete["day"]
 
-        # Update markdown
-        for cb in self.checkboxes:
-            if cb["day"] == day and cb["checked"]:
-                line_index = cb["line_index"]
-                self.markdown_content[line_index] = self.markdown_content[
-                    line_index
-                ].replace("- [x]", "- [ ]")
+        # Find all checked boxes for this day
+        day_checkboxes = [cb for cb in self.checkboxes if cb["day"] == day and cb["checked"]]
+        
+        if not day_checkboxes:
+            return False
 
-                # Update checkbox state in memory
-                cb["checked"] = False
+        # Update all checkboxes for this day
+        for cb in day_checkboxes:
+            line_index = cb["line_index"]
+            self.markdown_content[line_index] = self.markdown_content[
+                line_index
+            ].replace("- [x]", "- [ ]")
 
-                # Update progress data
-                self.progress_data["completed_days"].remove(day)
-                self.progress_data["history"].append(
-                    {
-                        "action": "undo",
-                        "day": day,
-                        "timestamp": datetime.now().isoformat(),
-                    }
-                )
+            # Update checkbox state in memory
+            cb["checked"] = False
 
-                # Save files
-                self.save_markdown()
-                self.save_progress()
-                return True
+        # Update progress data (remove day from completed_days if it exists)
+        if day in self.progress_data["completed_days"]:
+            self.progress_data["completed_days"].remove(day)
+        
+        # Add single undo entry to history
+        self.progress_data["history"].append(
+            {
+                "action": "undo",
+                "day": day,
+                "timestamp": datetime.now().isoformat(),
+            }
+        )
 
-        return False
+        # Save files once
+        self.save_markdown()
+        self.save_progress()
+        return True
 
     def show_status(self):
         """Show detailed progress status"""
@@ -596,6 +610,7 @@ def main():
 
     # Handle commands
     if args.done:
+        tracker.parse_markdown()
         current_day = tracker.get_current_day()
         if tracker.mark_day_complete():
             console.print(f"[green]✅ Day {current_day} marked as complete![/green]\n")
