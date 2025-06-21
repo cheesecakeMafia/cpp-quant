@@ -39,5 +39,12 @@ exclude_lines = [
 [tool.ruff.lint]
 ignore = ["E722", "F401", "F811", "E712"]
 
+[dependency-groups]
+dev = [
+    "black>=25.1.0",
+    "isort>=6.0.1",
+    "mypy>=1.16.1",
+]
+
 [project.scripts]
 study = "study_tracker:main"

@@ -4,26 +4,24 @@ C++ Study Progress Tracker
 A simple CLI tool to track progress through the C++ Quantitative Finance Learning Path
 """
 
-import json
-import re
 import argparse
+import json
 import os
-from datetime import datetime, timedelta
-from pathlib import Path
-from typing import Dict, List, Tuple, Optional
+import re
 import shutil
+import sys
 from collections import defaultdict
+from datetime import datetime, timedelta
+from typing import Optional
 
 try:
-    from rich.console import Console
-    from rich.table import Table
-    from rich.progress import Progress, BarColumn, TextColumn
-    from rich.panel import Panel
     from rich import box
-    from rich.text import Text
+    from rich.console import Console
+    from rich.panel import Panel
+    from rich.table import Table
 except ImportError:
     print("Please install 'rich' library: pip install rich")
-    exit(1)
+    sys.exit(1)
 
 console = Console()
 
@@ -40,7 +38,7 @@ class StudyTracker:
         self.checkboxes = []
         self.progress_data = self.load_progress()
 
-    def load_progress(self) -> Dict:
+    def load_progress(self) -> dict:
         """Load progress data from hidden JSON file"""
         if os.path.exists(self.progress_file):
             try:
@@ -50,7 +48,7 @@ class StudyTracker:
                 return self.create_initial_progress()
         return self.create_initial_progress()
 
-    def create_initial_progress(self) -> Dict:
+    def create_initial_progress(self) -> dict:
         """Create initial progress structure"""
         return {
             "start_date": datetime.now().isoformat(),
@@ -73,7 +71,7 @@ class StudyTracker:
         """Parse markdown file to find all checkboxes and their content"""
         if not os.path.exists(self.markdown_file):
             console.print(f"[red]Error: {self.markdown_file} not found![/red]")
-            exit(1)
+            sys.exit(1)
 
         with open(self.markdown_file, "r", encoding="utf-8") as f:
             self.markdown_content = f.readlines()
@@ -132,7 +130,9 @@ class StudyTracker:
             day = self.get_current_day()
 
         # Find all unchecked boxes for this day
-        day_checkboxes = [cb for cb in self.checkboxes if cb["day"] == day and not cb["checked"]]
+        day_checkboxes = [
+            cb for cb in self.checkboxes if cb["day"] == day and not cb["checked"]
+        ]
         
         if not day_checkboxes:
             return False
@@ -234,7 +234,9 @@ class StudyTracker:
         day = last_complete["day"]
 
         # Find all checked boxes for this day
-        day_checkboxes = [cb for cb in self.checkboxes if cb["day"] == day and cb["checked"]]
+        day_checkboxes = [
+            cb for cb in self.checkboxes if cb["day"] == day and cb["checked"]
+        ]
         
         if not day_checkboxes:
             return False

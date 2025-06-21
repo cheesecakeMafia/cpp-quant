@@ -257,7 +257,6 @@ class TestErrorHandling:
         from study_tracker import StudyTracker, main
         
         markdown_file = os.path.join(temp_dir, "test.md")
-        progress_file = os.path.join(temp_dir, ".progress.json")
         
         with open(markdown_file, "w") as f:
             f.write(sample_markdown)

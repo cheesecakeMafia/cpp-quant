@@ -163,12 +163,7 @@ class TestWorkflowIntegration:
         initial_day = tracker.get_current_day()
         tracker.mark_day_complete(initial_day)
         
-        # Capture modified state
-        modified_state = {
-            "completed_days": copy.deepcopy(tracker.progress_data["completed_days"]),
-            "total_sessions": tracker.progress_data["stats"]["total_study_sessions"],
-            "checkboxes": copy.deepcopy([(cb["day"], cb["checked"]) for cb in tracker.checkboxes])
-        }
+        # Note: modified_state would be captured here for comparison if needed
 
         # Undo operation
         undo_success = tracker.undo_last_action()
@@ -223,7 +218,6 @@ class TestWorkflowIntegration:
         """Test completing multiple days in sequence"""
         tracker.parse_markdown()
 
-        initial_day = tracker.get_current_day()
         days_to_complete = 3
         completed_days = []
 
@@ -403,7 +397,6 @@ class TestWorkflowIntegration:
         tracker.parse_markdown()
 
         # Create a scenario with file permission issues
-        original_progress = copy.deepcopy(tracker.progress_data)
         
         # Simulate file write failure
         with patch('builtins.open', side_effect=OSError("Permission denied")):
