@@ -553,6 +553,17 @@ class TestEdgeCases:
         assert "🔥" in tracker.checkboxes[0]["content"]
         assert "α β γ" in tracker.checkboxes[1]["content"]
 
+    @pytest.fixture
+    def isolated_tracker(self, temp_dir, sample_markdown):
+        """Create isolated tracker for concurrent modification tests"""
+        markdown_file = os.path.join(temp_dir, "isolated_study_plan.md")
+        progress_file = os.path.join(temp_dir, ".isolated_progress.json")
+
+        with open(markdown_file, "w") as f:
+            f.write(sample_markdown)
+
+        return StudyTracker(markdown_file, progress_file)
+
     def test_concurrent_modifications(self, isolated_tracker):
         """Test handling when markdown is modified externally"""
         tracker = isolated_tracker
